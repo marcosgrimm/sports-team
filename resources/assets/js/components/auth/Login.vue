@@ -16,9 +16,8 @@
                                        size="20" v-model="form.password">
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="wp-submit" id="wp-submit" class="btn btn-brand btn-block mb-4"
+                                <input type="submit" class="btn btn-brand btn-block"
                                        value="Sign In">
-                                <input type="hidden" name="redirect_to" value="https://themes.getbootstrap.com/my-account/">
                             </div>
                             <template v-if="authException">
                                 <div class="alert alert-danger text-center" role="alert">

@@ -27,7 +27,11 @@ class TeamsController extends Controller
     }
     public function store(Request $request)
     {
-        $team = Team::create($request);
+        $name = $request->get('name');
+
+        $team = new Team();
+        $team->name = $name;
+        $team->save();
 
         return response()->json(['team'=>$team],200);
     }

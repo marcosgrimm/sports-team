@@ -24,7 +24,7 @@
                     </template>
                     <template v-else>
                         <li>
-                            <router-link to="/teams">Team</router-link>
+                            <router-link to="/teams">Teams</router-link>
                         </li>
                         <li>
                             <router-link to="/players">Players</router-link>
@@ -35,12 +35,6 @@
                                     class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#!" @click.prevent="logout">Logout</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
                             </ul>
                         </li>
                     </template>

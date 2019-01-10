@@ -6,7 +6,7 @@
             <th class="col-md-1 text-center"><span class="glyphicon glyphicon-cog"></span> </th>
         </thead>
         <tbody>
-        <template v-if="!teams.length">
+        <template v-if="!teams">
             <tr>
                 <td colspan="2">No teams registered yet.</td>
             </tr>
@@ -16,7 +16,9 @@
                 <td>{{team.id}}</td>
                 <td>{{team.name}}</td>
                 <td  class="text-center">
-                    <router-link :to="`/teams/${team.id}`">Edit</router-link>
+                    <router-link :to="`/teams/${team.id}`" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-edit"></span></router-link>
+                    <router-link to="/teams" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-sign"></span></router-link>
+
                 </td>
             </tr>
         </template>
