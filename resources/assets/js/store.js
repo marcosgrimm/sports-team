@@ -10,6 +10,7 @@ export default {
         loading: false,
         auth_exception: null,
         teams: null,
+        players: null,
     },
     getters: {
         checkLoading(state) {
@@ -26,6 +27,11 @@ export default {
         },
         getTeams(state){
             return state.teams;
+        },
+        getPlayers(state){
+            console.log(state);
+
+            return state.players;
         },
     },
     mutations: {
@@ -53,6 +59,9 @@ export default {
         },
         setTeams(state,payload){
             state.teams = payload;
+        },
+        setPlayers(state,payload){
+            state.players = payload;
         }
     },
     actions: {
@@ -65,6 +74,13 @@ export default {
                     context.commit('setTeams', response.data.teams);
                 })
         },
+        getPlayers(context) {
+            axios.get('/api/players')
+                .then((response) => {
+                    context.commit('setPlayers', response.data.players);
+                })
+        },
+
 
 
     }

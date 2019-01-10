@@ -6,6 +6,11 @@ import TeamsList from "./components/teams/TeamsList";
 import NewTeam from "./components/teams/NewTeam";
 import Team from "./components/teams/Team";
 
+import PlayersDefault from "./components/players/PlayersDefault";
+import PlayersList from "./components/players/PlayersList";
+import NewPlayer from "./components/players/NewPlayer";
+import Player from "./components/players/Player";
+
 export const routes = [
     {
         path: '/',
@@ -37,6 +42,27 @@ export const routes = [
             {
                 path:':id',
                 component:Team
+            },
+        ]
+    },
+    {
+        path: '/players',
+        component: PlayersDefault,
+        meta: {
+            mustAuth: true
+        },
+        children: [
+            {
+                path:'/',
+                component:PlayersList
+            },
+            {
+                path:'new',
+                component:NewPlayer
+            },
+            {
+                path:':id',
+                component:Player
             },
 
         ]

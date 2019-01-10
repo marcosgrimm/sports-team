@@ -28,3 +28,11 @@ $factory->define(App\Models\Team::class, function (Faker $faker) {
         'name' => $faker->unique()->country,
     ];
 });
+
+
+$factory->define(App\Models\Player::class, function (Faker $faker) {
+    return [
+        'first_name' => $faker->unique()->firstName,
+        'last_name' => $faker->unique()->lastName,
+    ];
+});

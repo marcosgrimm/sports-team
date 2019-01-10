@@ -29,4 +29,10 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::get('teams/{id}', 'TeamsController@show');
     Route::delete('teams/{id}', 'TeamsController@destroy');
 
+    Route::get('players', 'PlayersController@index');
+    Route::post('players/{player}', 'PlayersController@update');
+    Route::post('players', 'PlayersController@store');
+    Route::get('players/{id}', 'PlayersController@show');
+    Route::delete('players/{id}', 'PlayersController@destroy');
+
 });
