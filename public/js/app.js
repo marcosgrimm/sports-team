@@ -1477,6 +1477,10 @@ __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.response.use(null, fu
     return Promise.reject(error);
 });
 
+if (store.getters.getLoggedUser) {
+    axios.defaults.headers.common["Authorization"] = "Bearer " + store.getters.getLoggedUser.token;
+}
+
 var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
     el: '#app',
     router: router,
@@ -47495,7 +47499,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47599,8 +47603,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$store.dispatch("loginAction");
 
             Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["b" /* login */])(this.$data.form).then(function (response) {
-                console.log(response);
-
                 _this.$store.commit("successfulLogin", response);
                 _this.$router.push({ path: '/' });
             }).catch(function (exception) {
@@ -48033,7 +48035,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48083,6 +48085,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         teams: function teams() {
             return this.$store.getters.getTeams;
         }
+    },
+    methods: {
+        deleteTeam: function deleteTeam(id) {
+            var _this = this;
+
+            console.log(id);
+            axios.delete('/api/teams/' + id).then(function (response) {
+                _this.$store.dispatch('getTeams');
+            });
+        }
     }
 });
 
@@ -48122,10 +48134,15 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c(
-                      "router-link",
+                      "button",
                       {
                         staticClass: "btn btn-danger btn-xs",
-                        attrs: { to: "/teams" }
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.deleteTeam(team.id)
+                          }
+                        }
                       },
                       [
                         _c("span", {
@@ -48264,7 +48281,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48330,11 +48347,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return;
             }
 
-            axios.post('/api/teams', team, {
-                headers: {
-                    "Authorization": "Bearer " + this.loggedUser.token
-                }
-            }).then(function (response) {
+            axios.post('/api/teams', team).then(function (response) {
                 _this.$router.push('/teams');
             });
         },
@@ -48536,7 +48549,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48547,6 +48560,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validate_js__);
 //
 //
 //
@@ -48567,6 +48582,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Team",
@@ -48574,6 +48591,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         loggedUser: function loggedUser() {
             return this.$store.getters.getLoggedUser;
+        },
+        teams: function teams() {
+            console.log(this.$store.getters);
+            return this.$store.getters.getTeams;
         }
     },
     data: function data() {
@@ -48587,13 +48608,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var _this = this;
 
-        axios.get("/api/teams/" + this.$route.params.id, {
-            headers: {
-                "Authorization": "Bearer " + this.loggedUser.token
+        if (this.teams) {
+            this.team = this.teams.find(function (team) {
+                return team.id == _this.$route.params.id;
+            });
+        } else {
+            axios.get('/api/teams/' + this.$route.params.id).then(function (response) {
+                _this.team = response.data.team;
+            });
+        }
+    },
+
+    methods: {
+        edit: function edit() {
+            var _this2 = this;
+
+            this.errors = null;
+            var constraints = this.getConstraints();
+            var team = this.$data.team;
+            var errors = __WEBPACK_IMPORTED_MODULE_0_validate_js___default()(team, constraints);
+            if (errors) {
+                this.errors = errors;
+                return;
             }
-        }).then(function (response) {
-            _this.team = response.data.team;
-        });
+
+            axios.post('/api/teams/' + this.$route.params.id, team).then(function (response) {
+                _this2.$router.push('/teams');
+            });
+        },
+        getConstraints: function getConstraints() {
+            return {
+                name: {
+                    presence: true,
+                    length: {
+                        minimum: 3,
+                        message: 'A team name should not be so short. Please make it at least 3 characters. Lets create a BIG team!'
+                    }
+                }
+
+            };
+        }
     }
 });
 
@@ -48611,7 +48665,7 @@ var render = function() {
       on: {
         submit: function($event) {
           $event.preventDefault()
-          return _vm.add($event)
+          return _vm.edit($event)
         }
       }
     },
@@ -48735,7 +48789,6 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLoggedUs
             localStorage.setItem("user", JSON.stringify(state.loggedUser));
         },
         errorLogin: function errorLogin(state, payload) {
-            console.log(state, payload);
             state.auth_exception = payload.exception;
             state.loading = false;
         },
@@ -48754,12 +48807,7 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLoggedUs
             context.commit("login");
         },
         getTeams: function getTeams(context) {
-            console.log(context.state.loggedUser.token);
-            axios.get('/api/teams', {
-                headers: {
-                    "Authorization": "Bearer " + context.state.loggedUser.token
-                }
-            }).then(function (response) {
+            axios.get('/api/teams').then(function (response) {
                 context.commit('setTeams', response.data.teams);
             });
         }

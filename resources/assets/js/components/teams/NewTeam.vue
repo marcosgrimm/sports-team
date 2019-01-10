@@ -48,11 +48,7 @@
                     return;
                 }
 
-                axios.post('/api/teams', team,{
-                    headers: {
-                        "Authorization": "Bearer " + this.loggedUser.token
-                    }
-                }).then((response)=>{
+                axios.post('/api/teams', team).then((response)=>{
                     this.$router.push('/teams');
                 });
 

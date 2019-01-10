@@ -42,7 +42,6 @@ export default {
 
         },
         errorLogin(state, payload){
-            console.log(state, payload);
             state.auth_exception = payload.exception;
             state.loading = false;
         },
@@ -61,12 +60,7 @@ export default {
             context.commit("login");
         },
         getTeams(context) {
-            console.log(context.state.loggedUser.token);
-            axios.get('/api/teams',{
-                headers: {
-                    "Authorization": "Bearer "+context.state.loggedUser.token
-                }
-            })
+            axios.get('/api/teams')
                 .then((response) => {
                     context.commit('setTeams', response.data.teams);
                 })

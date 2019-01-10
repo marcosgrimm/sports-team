@@ -38,6 +38,7 @@ export const routes = [
                 path:':id',
                 component:Team
             },
+
         ]
 
     }

@@ -21,14 +21,12 @@ Route::group(['prefix' => 'auth'], function ($router) {
 
 });
 
-Route::get('teams', 'TeamsController@index');
-
 Route::group(['middleware' => 'jwt.auth'], function ($router) {
 
     Route::get('teams', 'TeamsController@index');
+    Route::post('teams/{team}', 'TeamsController@update');
     Route::post('teams', 'TeamsController@store');
     Route::get('teams/{id}', 'TeamsController@show');
-    Route::post('teams/{id}', 'TeamsController@update');
     Route::delete('teams/{id}', 'TeamsController@destroy');
 
 });

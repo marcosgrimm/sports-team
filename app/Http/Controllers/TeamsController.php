@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTeamRequest;
+use App\Http\Requests\UpdateTeamRequest;
 use App\Models\Team;
-use Illuminate\Http\Request;
 
 class TeamsController extends Controller
 {
@@ -21,23 +22,26 @@ class TeamsController extends Controller
         return response()->json(["team"=>$team], 200);
     }
 
-    public function update($id)
-    {
-
-    }
-    public function store(Request $request)
+    public function update( UpdateTeamRequest $request, Team $team)
     {
         $name = $request->get('name');
 
-        $team = new Team();
         $team->name = $name;
         $team->save();
 
         return response()->json(['team'=>$team],200);
     }
 
+    public function store(CreateTeamRequest $request)
+    {
+        $name = $request->get('name');
+        $team = Team::create(['name' => $name]);
+
+        return response()->json(['team'=>$team],200);
+    }
+
     public function destroy($id)
     {
-
+        Team::destroy($id);
     }
 }

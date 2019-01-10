@@ -17,7 +17,7 @@
                 <td>{{team.name}}</td>
                 <td  class="text-center">
                     <router-link :to="`/teams/${team.id}`" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-edit"></span></router-link>
-                    <router-link to="/teams" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-sign"></span></router-link>
+                    <button  @click.prevent="deleteTeam(team.id)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-sign"></span></button>
 
                 </td>
             </tr>
@@ -36,7 +36,16 @@
             teams(){
                 return this.$store.getters.getTeams;
             }
-        }
+        },
+        methods: {
+            deleteTeam(id) {
+                console.log(id);
+                axios.delete('/api/teams/'+id)
+                    .then((response) => {
+                        this.$store.dispatch('getTeams');
+                    })
+            }
+        },
     }
 </script>
 
