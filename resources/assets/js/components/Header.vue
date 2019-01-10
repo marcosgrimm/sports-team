@@ -1,24 +1,55 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-        <router-link class="navbar-brand" to="/">My Vue App</router-link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li>
-                    <router-link to="/login" class="nav-link">Login</router-link>
-                </li>
-                <li>
-                    <router-link to="/register" class="nav-link">Register</router-link>
-                </li>
-
-            </ul>
-        </div>
+    <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Sports Teams</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav ">
+
+                    <template v-if="!loggedUser">
+                        <li>
+                            <router-link to="/login">Sign In</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/register">Sign On</router-link>
+                        </li>
+                    </template>
+                    <template v-else>
+                        <li>
+                            <router-link to="/teams">Team</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/players">Players</router-link>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false"> {{loggedUser.name}} <span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#!" @click.prevent="logout">Logout</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </template>
+
+                </ul>
+            </div>
         </div>
     </nav>
+
 </template>
 
 <script>
@@ -31,8 +62,8 @@
             }
         },
         computed: {
-            currentUser() {
-                return this.$store.getters.currentUser
+            loggedUser() {
+                return this.$store.getters.getLoggedUser
             }
         }
     }
