@@ -14,5 +14,15 @@ use Illuminate\Database\Eloquent\Model;
 class Player extends Model
 {
 
-    private $protected = [ 'first_name','last_name'];
+    protected $fillable = ['first_name', 'last_name'];
+
+    public function playerTeams()
+    {
+        return $this->hasMany(TeamPlayer::class, 'player_id', 'id');
+    }
+
+    public function teams()
+    {
+        return $this->hasManyThrough(Team::class, TeamPlayer::class,'player_id', 'id',null, 'team_id');
+    }
 }

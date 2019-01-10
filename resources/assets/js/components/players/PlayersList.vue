@@ -32,6 +32,7 @@
     export default {
         name: "PlayersList",
         mounted(){
+
             this.$store.dispatch('getPlayers');
         },
         computed: {

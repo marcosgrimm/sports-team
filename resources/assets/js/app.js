@@ -39,6 +39,7 @@ Axios.interceptors.response.use(null, (error) => {
     return Promise.reject(error);
 })
 
+
 if (store.getters.getLoggedUser){
     axios.defaults.headers.common["Authorization"] = "Bearer "+store.getters.getLoggedUser.token;
 }

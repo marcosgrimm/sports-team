@@ -8,9 +8,14 @@ use App\Models\Team;
 
 class TeamsController extends Controller
 {
+    public function players(Team $team){
+        $teamPlayers = $team->teamPlayers()->with('player')->get();
+        return response()->json(["teamPlayers" => $teamPlayers], 200);
+    }
+
     public function index()
     {
-        $teams = Team::all();
+        $teams = Team::orderBy('name')->get();
 
         return response()->json(["teams"=>$teams], 200);
     }

@@ -29,8 +29,6 @@ export default {
             return state.teams;
         },
         getPlayers(state){
-            console.log(state);
-
             return state.players;
         },
     },
@@ -46,6 +44,7 @@ export default {
             state.loggedUser = Object.assign({}, payload.user,{token: payload.access_token});
             localStorage.setItem("user", JSON.stringify(state.loggedUser));
 
+            axios.defaults.headers.common["Authorization"] = "Bearer "+payload.access_token;
         },
         errorLogin(state, payload){
             state.auth_exception = payload.exception;

@@ -39,7 +39,6 @@
         },
         methods: {
             deleteTeam(id) {
-                console.log(id);
                 axios.delete('/api/teams/'+id)
                     .then((response) => {
                         this.$store.dispatch('getTeams');

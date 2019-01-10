@@ -49138,7 +49138,7 @@ var render = function() {
     _c("div", { staticClass: "col-md-offset-2 col-md-8" }, [
       _c("div", { staticClass: "panel panel-default" }, [
         _c("div", { staticClass: "panel-heading" }, [
-          _vm._v("\n                World Soccer Teams\n                "),
+          _vm._v("\n                Teams\n                "),
           _c(
             "div",
             { staticClass: "pull-right" },
@@ -49266,7 +49266,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49321,7 +49321,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteTeam: function deleteTeam(id) {
             var _this = this;
 
-            console.log(id);
             axios.delete('/api/teams/' + id).then(function (response) {
                 _this.$store.dispatch('getTeams');
             });
@@ -49780,7 +49779,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49793,6 +49792,53 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validate_js__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49833,6 +49879,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             team: {
                 name: null
             },
+            storedPlayers: null,
+
             errors: null
         };
     },
@@ -49848,11 +49896,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.team = response.data.team;
             });
         }
+
+        this.getStoredPlayers();
     },
 
     methods: {
-        edit: function edit() {
+        getStoredPlayers: function getStoredPlayers() {
             var _this2 = this;
+
+            axios.get('/api/teams/' + this.$route.params.id + '/players').then(function (response) {
+                if (response.data.teamPlayers.length) {
+                    _this2.storedPlayers = response.data.teamPlayers;
+                }
+            });
+        },
+        edit: function edit() {
+            var _this3 = this;
 
             this.errors = null;
             var constraints = this.getConstraints();
@@ -49864,7 +49923,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             axios.post('/api/teams/' + this.$route.params.id, team).then(function (response) {
-                _this2.$router.push('/teams');
+                _this3.$router.push('/teams');
+            });
+        },
+        deleteTeamPlayer: function deleteTeamPlayer(playerId) {
+            var _this4 = this;
+
+            console.log(playerId);
+            axios.delete('/api/teams/' + this.$route.params.id + '/players/' + playerId).then(function (response) {
+                _this4.getStoredPlayers();
             });
         },
         getConstraints: function getConstraints() {
@@ -49890,76 +49957,189 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          return _vm.edit($event)
-        }
-      }
-    },
-    [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.team.name,
-              expression: "team.name"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", id: "name" },
-          domProps: { value: _vm.team.name },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.team, "name", $event.target.value)
-            }
+  return _c("div", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.edit($event)
           }
-        })
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _vm.errors
-        ? _vm._l(_vm.errors, function(errorMsgs, inputName) {
-            return _c(
-              "div",
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
               {
-                key: inputName,
-                staticClass: "alert alert-danger text-center",
-                attrs: { role: "alert" }
-              },
-              [
-                _c("b", [_vm._v(_vm._s(inputName))]),
-                _vm._v(": " + _vm._s(errorMsgs.join(",")) + "\n        ")
-              ]
-            )
+                name: "model",
+                rawName: "v-model",
+                value: _vm.team.name,
+                expression: "team.name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", id: "name" },
+            domProps: { value: _vm.team.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.team, "name", $event.target.value)
+              }
+            }
           })
-        : _vm._e()
-    ],
-    2
-  )
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm.errors
+          ? _vm._l(_vm.errors, function(errorMsgs, inputName) {
+              return _c(
+                "div",
+                {
+                  key: inputName,
+                  staticClass: "alert alert-danger text-center",
+                  attrs: { role: "alert" }
+                },
+                [
+                  _c("b", [_vm._v(_vm._s(inputName))]),
+                  _vm._v(": " + _vm._s(errorMsgs.join(",")) + "\n        ")
+                ]
+              )
+            })
+          : _vm._e()
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v("\n                Players\n            ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "panel-body" },
+            [
+              !_vm.storedPlayers
+                ? [_vm._m(1)]
+                : [
+                    _c("table", { staticClass: "table table-striped" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.storedPlayers, function(storedPlayer) {
+                          return _c("tr", [
+                            _c("td", [_vm._v(_vm._s(storedPlayer.player.id))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(storedPlayer.player.first_name))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(_vm._s(storedPlayer.player.last_name))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "col-md-1 text-center" }, [
+                              _vm._v(_vm._s(storedPlayer.start))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "col-md-1 text-center" }, [
+                              _vm._v(_vm._s(storedPlayer.end))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-xs",
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.deleteTeamPlayer(
+                                        storedPlayer.player.id
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass:
+                                      "glyphicon glyphicon-remove-sign"
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ]
+            ],
+            2
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pull-right" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "submit" } },
-        [_vm._v("Edit")]
-      )
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12 " }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success pull-right",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Save")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { attrs: { colspan: "2" } }, [
+        _vm._v("No players for this team yet.")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("First Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Last Name")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("Start")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("End")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "col-md-1 text-center" }, [
+        _c("span", { staticClass: "glyphicon glyphicon-cog" })
+      ])
     ])
   }
 ]
@@ -50236,7 +50416,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50281,6 +50461,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "PlayersList",
     mounted: function mounted() {
+
         this.$store.dispatch('getPlayers');
     },
 
@@ -50488,7 +50669,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50525,15 +50706,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "NewPlayer",
+    mounted: function mounted() {
+        this.$store.dispatch('getTeams');
+    },
     data: function data() {
         return {
             player: {
                 first_name: null,
-                last_name: null
+                last_name: null,
+                team: {
+                    id: null,
+                    start: null,
+                    end: null
+                }
             },
             errors: null
         };
@@ -50542,6 +50756,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         loggedUser: function loggedUser() {
             return this.$store.getters.getLoggedUser;
+        },
+        teams: function teams() {
+            return this.$store.getters.getTeams;
         }
     },
     methods: {
@@ -50655,6 +50872,105 @@ var render = function() {
             }
           }
         })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-3" }, [
+            _c("label", { attrs: { for: "last_name" } }, [_vm._v("Team")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.player.team.id,
+                    expression: "player.team.id"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "team" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.player.team,
+                      "id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.teams, function(team) {
+                return _c("option", { domProps: { value: team.id } }, [
+                  _vm._v(_vm._s(team.name))
+                ])
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3" }, [
+            _c("label", { attrs: { for: "last_name" } }, [_vm._v("Start")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.player.team.start,
+                  expression: "player.team.start"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date", id: "start" },
+              domProps: { value: _vm.player.team.start },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.player.team, "start", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3" }, [
+            _c("label", { attrs: { for: "last_name" } }, [_vm._v("End")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.player.team.end,
+                  expression: "player.team.end"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date", id: "end" },
+              domProps: { value: _vm.player.team.end },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.player.team, "end", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
       ]),
       _vm._v(" "),
       _vm._m(0),
@@ -50788,7 +51104,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50825,6 +51141,77 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -50836,8 +51223,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.$store.getters.getLoggedUser;
         },
         players: function players() {
-            console.log(this.$store.getters);
             return this.$store.getters.getPlayers;
+        },
+        teams: function teams() {
+            return this.$store.getters.getTeams;
         }
     },
     data: function data() {
@@ -50846,6 +51235,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 first_name: null,
                 last_name: null
             },
+            team: {
+                id: null,
+                start: null,
+                end: null
+            },
+            storedTeams: null,
             errors: null
         };
     },
@@ -50861,23 +51256,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.player = response.data.player;
             });
         }
+
+        this.getStoredTeams();
+        this.$store.dispatch('getTeams');
     },
 
     methods: {
-        edit: function edit() {
+        getStoredTeams: function getStoredTeams() {
             var _this2 = this;
+
+            axios.get('/api/players/' + this.$route.params.id + '/teams').then(function (response) {
+                if (response.data.playerTeams.length) {
+
+                    _this2.storedTeams = response.data.playerTeams;
+                }
+            });
+        },
+        edit: function edit() {
+            var _this3 = this;
 
             this.errors = null;
             var constraints = this.getConstraints();
             var player = this.$data.player;
+            var team = this.$data.team;
             var errors = __WEBPACK_IMPORTED_MODULE_0_validate_js___default()(player, constraints);
             if (errors) {
                 this.errors = errors;
                 return;
             }
 
-            axios.post('/api/players/' + this.$route.params.id, player).then(function (response) {
-                _this2.$router.push('/players');
+            axios.post('/api/players/' + this.$route.params.id, { player: player, team: team }).then(function (response) {
+                _this3.getStoredTeams();
+                _this3.team = {
+                    id: null,
+                    start: null,
+                    end: null
+                };
+            });
+        },
+        deletePlayerTeam: function deletePlayerTeam(teamId) {
+            var _this4 = this;
+
+            axios.delete('/api/teams/' + teamId + '/players/' + this.$route.params.id).then(function (response) {
+                _this4.getStoredTeams();
             });
         },
         getConstraints: function getConstraints() {
@@ -50910,102 +51331,306 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          return _vm.edit($event)
+  return _c("div", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.edit($event)
+          }
         }
-      }
-    },
-    [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "first_name" } }, [_vm._v("First Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.player.first_name,
-              expression: "player.first_name"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", id: "first_name" },
-          domProps: { value: _vm.player.first_name },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.player, "first_name", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "last_name" } }, [_vm._v("Last Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.player.last_name,
-              expression: "player.last_name"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", id: "last_name" },
-          domProps: { value: _vm.player.last_name },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.player, "last_name", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _vm.errors
-        ? _vm._l(_vm.errors, function(errorMsgs, inputName) {
-            return _c(
-              "div",
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "first_name" } }, [_vm._v("First Name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
               {
-                key: inputName,
-                staticClass: "alert alert-danger text-center",
-                attrs: { role: "alert" }
-              },
-              [
-                _c("b", [_vm._v(_vm._s(inputName))]),
-                _vm._v(": " + _vm._s(errorMsgs.join(",")) + "\n        ")
-              ]
-            )
+                name: "model",
+                rawName: "v-model",
+                value: _vm.player.first_name,
+                expression: "player.first_name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", id: "first_name" },
+            domProps: { value: _vm.player.first_name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.player, "first_name", $event.target.value)
+              }
+            }
           })
-        : _vm._e()
-    ],
-    2
-  )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "last_name" } }, [_vm._v("Last Name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.player.last_name,
+                expression: "player.last_name"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", id: "last_name" },
+            domProps: { value: _vm.player.last_name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.player, "last_name", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("label", { attrs: { for: "last_name" } }, [_vm._v("Team")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.team.id,
+                      expression: "team.id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "team" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.team,
+                        "id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.teams, function(team) {
+                  return _c("option", { domProps: { value: team.id } }, [
+                    _vm._v(_vm._s(team.name))
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("label", { attrs: { for: "last_name" } }, [_vm._v("Start")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.team.start,
+                    expression: "team.start"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "date", id: "start" },
+                domProps: { value: _vm.team.start },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.team, "start", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("label", { attrs: { for: "last_name" } }, [_vm._v("End")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.team.end,
+                    expression: "team.end"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "date", id: "end" },
+                domProps: { value: _vm.team.end },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.team, "end", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm.errors
+          ? _vm._l(_vm.errors, function(errorMsgs, inputName) {
+              return _c(
+                "div",
+                {
+                  key: inputName,
+                  staticClass: "alert alert-danger text-center",
+                  attrs: { role: "alert" }
+                },
+                [
+                  _c("b", [_vm._v(_vm._s(inputName))]),
+                  _vm._v(": " + _vm._s(errorMsgs.join(",")) + "\n            ")
+                ]
+              )
+            })
+          : _vm._e()
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v("\n                    Teams\n                ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "panel-body" },
+            [
+              !_vm.storedTeams
+                ? [_vm._m(1)]
+                : [
+                    _c("table", { staticClass: "table table-striped" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.storedTeams, function(storedTeam) {
+                          return _c("tr", [
+                            _c("td", [_vm._v(_vm._s(storedTeam.team.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(storedTeam.team.name))]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "col-md-1 text-center" }, [
+                              _vm._v(_vm._s(storedTeam.start))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "col-md-1 text-center" }, [
+                              _vm._v(_vm._s(storedTeam.end))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-center" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-xs",
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.deletePlayerTeam(storedTeam.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass:
+                                      "glyphicon glyphicon-remove-sign"
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ])
+                  ]
+            ],
+            2
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "pull-right" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "submit" } },
-        [_vm._v("Edit")]
-      )
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12 " }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success pull-right",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Save")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { attrs: { colspan: "2" } }, [
+        _vm._v("No teams for this player yet.")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("Start")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("End")]),
+      _vm._v(" "),
+      _c("th", { staticClass: "col-md-1 text-center" }, [
+        _c("span", { staticClass: "glyphicon glyphicon-cog" })
+      ])
     ])
   }
 ]
@@ -51054,8 +51679,6 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLoggedUs
             return state.teams;
         },
         getPlayers: function getPlayers(state) {
-            console.log(state);
-
             return state.players;
         }
     },
@@ -51070,6 +51693,8 @@ var user = Object(__WEBPACK_IMPORTED_MODULE_0__helpers_auth__["a" /* getLoggedUs
             state.isLogged = true;
             state.loggedUser = Object.assign({}, payload.user, { token: payload.access_token });
             localStorage.setItem("user", JSON.stringify(state.loggedUser));
+
+            axios.defaults.headers.common["Authorization"] = "Bearer " + payload.access_token;
         },
         errorLogin: function errorLogin(state, payload) {
             state.auth_exception = payload.exception;
