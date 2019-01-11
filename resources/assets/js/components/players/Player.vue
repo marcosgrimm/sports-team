@@ -75,7 +75,7 @@
                                     <td class="col-md-1 text-center">{{storedTeam.end}}</td>
                                     <td class="text-center">
 
-                                        <button @click.prevent="deletePlayerTeam(storedTeam.id)"
+                                        <button @click.prevent="deletePlayerTeam(storedTeam.team.id)"
                                                 class="btn btn-danger btn-xs"><span
                                                 class="glyphicon glyphicon-remove-sign"></span></button>
 

@@ -51564,7 +51564,7 @@ var render = function() {
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
-                                      _vm.deletePlayerTeam(storedTeam.id)
+                                      _vm.deletePlayerTeam(storedTeam.team.id)
                                     }
                                   }
                                 },
