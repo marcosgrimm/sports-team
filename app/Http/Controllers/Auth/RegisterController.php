@@ -58,13 +58,14 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array $data
+     * @param  Request $request
      * @return \App\Models\User
      */
-    protected function create(Request $request)
+    public function create(Request $request)
     {
         $data = $request->all();
         $validator = $this->validator($data);
+
         if ($validator->failed()) {
             return response()->json([$validator], 400);
         }

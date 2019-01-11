@@ -14,9 +14,13 @@ class TeamsPlayersController extends Controller
      */
     public function destroy($teamId, $playerId)
     {
-        TeamPlayer::where('team_id', $teamId)
-            ->where('player_id', $playerId)
-            ->delete();
+        try {
+            TeamPlayer::where('team_id', $teamId)
+                ->where('player_id', $playerId)
+                ->delete();
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
 
         return response()->json([], 200);
 

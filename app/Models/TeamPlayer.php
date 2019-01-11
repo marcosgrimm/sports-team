@@ -20,16 +20,18 @@ class TeamPlayer extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function team(){
-        return $this->hasOne(Team::class,'id', 'team_id');
+    public function team()
+    {
+        return $this->hasOne(Team::class, 'id', 'team_id');
 
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function player(){
-        return $this->hasOne(Player::class,'id', 'player_id');
+    public function player()
+    {
+        return $this->hasOne(Player::class, 'id', 'player_id');
 
     }
 }

@@ -5,8 +5,10 @@
                 <div class="panel-heading">
                     Teams
                     <div class="pull-right">
-                        <router-link to="/teams/new" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-plus-sign"></span></router-link>
-                        <router-link to="/teams" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-list"></span></router-link>
+                        <router-link to="/teams/new" class="btn btn-success btn-xs"><span
+                                class="glyphicon glyphicon-plus-sign"></span></router-link>
+                        <router-link to="/teams" class="btn btn-primary btn-xs"><span
+                                class="glyphicon glyphicon-list"></span></router-link>
                     </div>
 
 

@@ -16,7 +16,11 @@ class PlayersController extends Controller
      */
     public function teams(Player $player)
     {
-        $playerTeams = $player->playerTeams()->with('team')->get();
+        try {
+            $playerTeams = $player->playerTeams()->with('team')->get();
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
 
         return response()->json(["playerTeams" => $playerTeams], 200);
     }
@@ -26,7 +30,11 @@ class PlayersController extends Controller
      */
     public function index()
     {
-        $players = Player::all();
+        try {
+            $players = Player::all();
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
 
         return response()->json(["players" => $players], 200);
     }
@@ -37,7 +45,11 @@ class PlayersController extends Controller
      */
     public function show($id)
     {
-        $player = Player::find($id);
+        try {
+            $player = Player::findOrFail($id);
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
 
         return response()->json(["player" => $player], 200);
     }
@@ -49,31 +61,39 @@ class PlayersController extends Controller
      */
     public function update(Request $request, Player $player)
     {
-        $player = \DB::transaction(function () use ($request, $player) {
-            $playerRequest = $request->get('player');
-            $firstName = $playerRequest['first_name'];
-            $lastName = $playerRequest['last_name'];
+        try {
+            $player = \DB::transaction(function () use ($request, $player) {
+                $playerRequest = $request->get('player');
+                $team = $request->get('team');
 
-            $team = $request->get('team');
-            $teamId = $team['id'];
-            $start = $team['start'];
-            $end = $team['end'];
+                $firstName = $playerRequest['first_name'];
+                $lastName = $playerRequest['last_name'];
+
+                $teamId = $team['id'];
+                $start = $team['start'];
+                $end = $team['end'];
 
 
-            $player->first_name = $firstName;
-            $player->last_name = $lastName;
-            $player->save();
+                $player->first_name = $firstName;
+                $player->last_name = $lastName;
+                $player->save();
 
-            $teamPlayer = new TeamPlayer();
-            $teamPlayer->team_id = $teamId;
-            $teamPlayer->player_id = $player->id;
-            $teamPlayer->start = $start;
-            $teamPlayer->end = $end;
-            $teamPlayer->save();
+                if ($teamId && $start && $end) {
+                    $teamPlayer = new TeamPlayer();
+                    $teamPlayer->team_id = $teamId;
+                    $teamPlayer->player_id = $player->id;
+                    $teamPlayer->start = $start;
+                    $teamPlayer->end = $end;
+                    $teamPlayer->save();
+                }
 
-            return $player;
+                return $player;
 
-        });
+            });
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
+
         return response()->json(['player' => $player], 200);
     }
 
@@ -83,31 +103,38 @@ class PlayersController extends Controller
      */
     public function store(CreatePlayerRequest $request)
     {
+        try {
+            $player = \DB::transaction(function () use ($request) {
+                $firstName = $request->get('first_name');
+                $lastName = $request->get('last_name');
+                $team = $request->get('team');
 
-        $player = \DB::transaction(function () use ($request) {
-            $firstName = $request->get('first_name');
-            $lastName = $request->get('last_name');
-            $team = $request->get('team');
-            $teamId = $team['id'];
-            $start = $team['start'];
-            $end = $team['end'];
+                $teamId = $team['id'];
+                $start = $team['start'];
+                $end = $team['end'];
 
-            $player = new Player();
-            $player->first_name = $firstName;
-            $player->last_name = $lastName;
-            $player->save();
+                $player = new Player();
+                $player->first_name = $firstName;
+                $player->last_name = $lastName;
+                $player->save();
 
-            $teamPlayer = new TeamPlayer();
-            $teamPlayer->team_id = $teamId;
-            $teamPlayer->player_id = $player->id;
-            $teamPlayer->start = $start;
-            $teamPlayer->end = $end;
-            $teamPlayer->save();
+                if ($teamId && $start && $end) {
+                    $teamPlayer = new TeamPlayer();
+                    $teamPlayer->team_id = $teamId;
+                    $teamPlayer->player_id = $player->id;
+                    $teamPlayer->start = $start;
+                    $teamPlayer->end = $end;
+                    $teamPlayer->save();
+                }
 
-            return $player;
-        });
+                return $player;
+            });
 
-        return response()->json(['player' => $player], 200);
+            return response()->json(['player' => $player], 200);
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
+
     }
 
     /**
@@ -116,8 +143,14 @@ class PlayersController extends Controller
      */
     public function destroy($id)
     {
-        TeamPlayer::where('player_id',$id)->delete();
-        Player::destroy($id);
+        try {
+            \DB::transaction(function () use ($id) {
+                TeamPlayer::where('player_id', $id)->delete();
+                Player::destroy($id);
+            });
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
 
         return response()->json([], 200);
 

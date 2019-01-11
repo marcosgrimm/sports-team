@@ -62,7 +62,7 @@
             }
         },
         computed: {
-            authException(){
+            authException() {
                 return this.$store.getters.getAuthException;
             }
         }

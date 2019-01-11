@@ -67,21 +67,21 @@
                     this.errors = errors;
                     return;
                 }
-                axios.post('/api/register', form).then((response)=>{
+                axios.post('/api/register', form).then((response) => {
                     this.$router.push('/login');
                 });
             },
             getConstraints() {
                 return {
                     email: {
-                        presence: {  allowEmpty: false },
+                        presence: {allowEmpty: false},
                         email: true
                     },
                     password: {
-                        presence: {  allowEmpty: false },
+                        presence: {allowEmpty: false},
                     },
                     name: {
-                        presence: {  allowEmpty: false },
+                        presence: {allowEmpty: false},
                     }
 
                 }

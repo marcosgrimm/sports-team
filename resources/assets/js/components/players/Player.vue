@@ -63,10 +63,10 @@
                         <template v-else>
                             <table class="table table-striped">
                                 <thead>
-                                    <th>Team</th>
-                                    <th class="col-md-1 text-center">Start</th>
-                                    <th class="col-md-1 text-center">End</th>
-                                    <th class="col-md-1 text-center"><span class="glyphicon glyphicon-cog"></span></th>
+                                <th>Team</th>
+                                <th class="col-md-1 text-center">Start</th>
+                                <th class="col-md-1 text-center">End</th>
+                                <th class="col-md-1 text-center"><span class="glyphicon glyphicon-cog"></span></th>
                                 </thead>
                                 <tbody>
                                 <tr v-for="storedTeam in storedTeams">
@@ -75,7 +75,8 @@
                                     <td class="col-md-1 text-center">{{storedTeam.end}}</td>
                                     <td class="text-center">
 
-                                        <button @click.prevent="deletePlayerTeam(storedTeam.id)" class="btn btn-danger btn-xs"><span
+                                        <button @click.prevent="deletePlayerTeam(storedTeam.id)"
+                                                class="btn btn-danger btn-xs"><span
                                                 class="glyphicon glyphicon-remove-sign"></span></button>
 
                                     </td>
@@ -140,7 +141,7 @@
         methods: {
             getStoredTeams() {
                 axios.get(`/api/players/${this.$route.params.id}/teams`).then((response) => {
-                    if (response.data.playerTeams.length){
+                    if (response.data.playerTeams.length) {
 
                         this.storedTeams = response.data.playerTeams;
                     }
@@ -157,18 +158,18 @@
                     return;
                 }
 
-                axios.post('/api/players/' + this.$route.params.id, {player:player, team:team}).then((response) => {
+                axios.post('/api/players/' + this.$route.params.id, {player: player, team: team}).then((response) => {
                     this.getStoredTeams();
-                    this.team =  {
+                    this.team = {
                         id: null,
-                            start: null,
-                            end: null,
+                        start: null,
+                        end: null,
                     };
                 });
 
             },
             deletePlayerTeam(teamId) {
-                axios.delete('/api/teams/'+teamId+'/players/'+this.$route.params.id)
+                axios.delete('/api/teams/' + teamId + '/players/' + this.$route.params.id)
                     .then((response) => {
                         this.getStoredTeams();
 
@@ -177,14 +178,14 @@
             getConstraints() {
                 return {
                     first_name: {
-                        presence: {  allowEmpty: false },
+                        presence: {allowEmpty: false},
                         length: {
                             minimum: 3,
                             message: 'A player name should not be so short. Please make it at least 3 characters.!'
                         }
                     },
                     last_name: {
-                        presence: {  allowEmpty: false },
+                        presence: {allowEmpty: false},
                         length: {
                             minimum: 3,
                             message: 'A player name should not be so short. Please make it at least 3 characters.!'

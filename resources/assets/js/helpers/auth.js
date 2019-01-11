@@ -1,17 +1,17 @@
-export function login (credentials) {
-    return new Promise ((resolve,reject) =>{
-        axios.post('/api/auth/login', credentials).then((response)=>{
+export function login(credentials) {
+    return new Promise((resolve, reject) => {
+        axios.post('/api/auth/login', credentials).then((response) => {
             resolve(response.data);
-        }).catch((err)=>{
+        }).catch((err) => {
             reject(err);
         });
     });
 }
 
-export function getLoggedUser(){
+export function getLoggedUser() {
     const loggedUserString = localStorage.getItem('user');
 
-    if (!loggedUserString){
+    if (!loggedUserString) {
         return null;
     }
 

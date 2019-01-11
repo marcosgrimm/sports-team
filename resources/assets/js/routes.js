@@ -37,16 +37,16 @@ export const routes = [
         },
         children: [
             {
-                path:'/',
-                component:TeamsList
+                path: '/',
+                component: TeamsList
             },
             {
-                path:'new',
-                component:NewTeam
+                path: 'new',
+                component: NewTeam
             },
             {
-                path:':id',
-                component:Team
+                path: ':id',
+                component: Team
             },
         ]
     },
@@ -58,16 +58,16 @@ export const routes = [
         },
         children: [
             {
-                path:'/',
-                component:PlayersList
+                path: '/',
+                component: PlayersList
             },
             {
-                path:'new',
-                component:NewPlayer
+                path: 'new',
+                component: NewPlayer
             },
             {
-                path:':id',
-                component:Player
+                path: ':id',
+                component: Player
             },
 
         ]

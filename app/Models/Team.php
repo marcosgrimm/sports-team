@@ -20,7 +20,7 @@ class Team extends Model
      */
     public function players()
     {
-        return $this->hasManyThrough(Player::class, TeamPlayer::class,'team_id', 'id',null, 'player_id');
+        return $this->hasManyThrough(Player::class, TeamPlayer::class, 'team_id', 'id', null, 'player_id');
     }
 
     /**
@@ -28,6 +28,6 @@ class Team extends Model
      */
     public function teamPlayers()
     {
-        return $this->hasMany( TeamPlayer::class,'team_id', 'id');
+        return $this->hasMany(TeamPlayer::class, 'team_id', 'id');
     }
 }

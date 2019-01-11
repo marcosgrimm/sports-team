@@ -97,20 +97,19 @@
             getConstraints() {
                 return {
                     first_name: {
-                        presence: {  allowEmpty: false },
+                        presence: {allowEmpty: false},
                         length: {
                             minimum: 3,
                             message: 'A player name should not be so short. Please make it at least 3 characters.!'
                         }
                     },
                     last_name: {
-                        presence: {  allowEmpty: false },
+                        presence: {allowEmpty: false},
                         length: {
                             minimum: 3,
                             message: 'A player name should not be so short. Please make it at least 3 characters.!'
                         }
                     }
-
                 }
             }
         }

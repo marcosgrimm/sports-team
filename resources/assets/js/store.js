@@ -25,10 +25,10 @@ export default {
         getAuthException(state) {
             return state.auth_exception;
         },
-        getTeams(state){
+        getTeams(state) {
             return state.teams;
         },
-        getPlayers(state){
+        getPlayers(state) {
             return state.players;
         },
     },
@@ -37,34 +37,34 @@ export default {
             state.loading = true;
             state.auth_exception = null;
         },
-        successfulLogin(state, payload){
+        successfulLogin(state, payload) {
             state.auth_exception = null;
             state.loading = false;
             state.isLogged = true;
-            state.loggedUser = Object.assign({}, payload.user,{token: payload.access_token});
+            state.loggedUser = Object.assign({}, payload.user, {token: payload.access_token});
             localStorage.setItem("user", JSON.stringify(state.loggedUser));
 
-            axios.defaults.headers.common["Authorization"] = "Bearer "+payload.access_token;
+            axios.defaults.headers.common["Authorization"] = "Bearer " + payload.access_token;
         },
-        errorLogin(state, payload){
+        errorLogin(state, payload) {
             state.auth_exception = payload.exception;
             state.loading = false;
         },
-        logout(state){
+        logout(state) {
             localStorage.removeItem("user");
             state.isLogged = false;
             state.loading = false;
             state.loggedUser = null;
         },
-        setTeams(state,payload){
+        setTeams(state, payload) {
             state.teams = payload;
         },
-        setPlayers(state,payload){
+        setPlayers(state, payload) {
             state.players = payload;
         }
     },
     actions: {
-        loginAction(context){
+        loginAction(context) {
             context.commit("login");
         },
         getTeams(context) {
@@ -79,7 +79,6 @@ export default {
                     context.commit('setPlayers', response.data.players);
                 })
         },
-
 
 
     }

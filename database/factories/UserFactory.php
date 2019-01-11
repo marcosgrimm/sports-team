@@ -17,11 +17,10 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'password' => bcrypt('secret'),
         'remember_token' => str_random(10),
     ];
 });
-
 
 $factory->define(App\Models\Team::class, function (Faker $faker) {
     $animals = [
@@ -252,7 +251,7 @@ $factory->define(App\Models\Team::class, function (Faker $faker) {
     ];
 
     return [
-        'name' => substr($faker->unique()->colorName.' '.$faker->randomElement($animals).'s',0,50),
+        'name' => substr($faker->unique()->colorName . ' ' . $faker->randomElement($animals) . 's', 0, 50),
     ];
 });
 
@@ -272,7 +271,7 @@ $factory->define(App\Models\TeamPlayer::class, function (Faker $faker) {
     $month = rand(1, 12);
     $day = rand(1, 28);
 
-    $date = \Carbon\Carbon::create($year,$month ,$day , 0, 0, 0);
+    $date = \Carbon\Carbon::create($year, $month, $day, 0, 0, 0);
 
     return [
         'team_id' => $faker->randomElement($teamIds),

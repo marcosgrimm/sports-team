@@ -29,6 +29,6 @@ class Player extends Model
      */
     public function teams()
     {
-        return $this->hasManyThrough(Team::class, TeamPlayer::class,'player_id', 'id',null, 'team_id');
+        return $this->hasManyThrough(Team::class, TeamPlayer::class, 'player_id', 'id', null, 'team_id');
     }
 }

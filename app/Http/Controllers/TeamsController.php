@@ -13,8 +13,15 @@ class TeamsController extends Controller
      * @param Team $team
      * @return \Illuminate\Http\JsonResponse
      */
-    public function players(Team $team){
-        $teamPlayers = $team->teamPlayers()->with('player')->get();
+    public function players(Team $team)
+    {
+        try {
+
+            $teamPlayers = $team->teamPlayers()->with('player')->get();
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+
+        }
         return response()->json(["teamPlayers" => $teamPlayers], 200);
     }
 
@@ -23,9 +30,12 @@ class TeamsController extends Controller
      */
     public function index()
     {
-        $teams = Team::orderBy('name')->get();
-
-        return response()->json(["teams"=>$teams], 200);
+        try {
+            $teams = Team::orderBy('name')->get();
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
+        return response()->json(["teams" => $teams], 200);
     }
 
     /**
@@ -34,9 +44,13 @@ class TeamsController extends Controller
      */
     public function show($id)
     {
-        $team = Team::find($id);
+        try {
+            $team = Team::findOrFail($id);
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
 
-        return response()->json(["team"=>$team], 200);
+        return response()->json(["team" => $team], 200);
     }
 
     /**
@@ -46,12 +60,16 @@ class TeamsController extends Controller
      */
     public function update(UpdateTeamRequest $request, Team $team)
     {
-        $name = $request->get('name');
+        try {
+            $name = $request->get('name');
 
-        $team->name = $name;
-        $team->save();
+            $team->name = $name;
+            $team->save();
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
 
-        return response()->json(['team'=>$team],200);
+        return response()->json(['team' => $team], 200);
     }
 
     /**
@@ -60,18 +78,27 @@ class TeamsController extends Controller
      */
     public function store(CreateTeamRequest $request)
     {
-        $name = $request->get('name');
-        $team = Team::create(['name' => $name]);
+        try {
+            $name = $request->get('name');
+            $team = Team::create(['name' => $name]);
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
 
-        return response()->json(['team'=>$team],200);
+        return response()->json(['team' => $team], 200);
     }
 
-    /**
-     * @param $id
-     */
     public function destroy($id)
     {
-        TeamPlayer::where('team_id',$id)->delete();
-        Team::destroy($id);
+        try {
+            \DB::transaction(function () use ($id) {
+                TeamPlayer::where('team_id', $id)->delete();
+                Team::destroy($id);
+            });
+        } catch (\Exception $e) {
+            return response()->json([], 400);
+        }
+        return response()->json([], 200);
+
     }
 }

@@ -1,7 +1,7 @@
 <template>
-    <form  @submit.prevent="add">
+    <form @submit.prevent="add">
         <div class="form-group">
-            <label for="name" >Name</label>
+            <label for="name">Name</label>
             <input type="text" class="form-control" id="name" v-model="team.name">
         </div>
         <div class="pull-right">
@@ -11,8 +11,9 @@
         </div>
 
         <template v-if="errors">
-            <div v-for="(errorMsgs,inputName) in errors" :key="inputName" class="alert alert-danger text-center" role="alert">
-               <b>{{inputName}}</b>: {{errorMsgs.join(',')}}
+            <div v-for="(errorMsgs,inputName) in errors" :key="inputName" class="alert alert-danger text-center"
+                 role="alert">
+                <b>{{inputName}}</b>: {{errorMsgs.join(',')}}
             </div>
         </template>
     </form>
@@ -20,6 +21,7 @@
 
 <script>
     import validate from 'validate.js';
+
     export default {
         name: "NewTeam",
         data() {
@@ -41,14 +43,14 @@
                 const constraints = this.getConstraints();
                 const team = this.$data.team;
                 const errors = validate(team, constraints);
-                if (errors){
+                if (errors) {
 
                     this.errors = errors;
 
                     return;
                 }
 
-                axios.post('/api/teams', team).then((response)=>{
+                axios.post('/api/teams', team).then((response) => {
                     this.$router.push('/teams');
                 });
 
@@ -56,7 +58,7 @@
             getConstraints() {
                 return {
                     name: {
-                        presence: {  allowEmpty: false },
+                        presence: {allowEmpty: false},
                         length: {
                             minimum: 3,
                             message: 'A team name should not be so short. Please make it at least 3 characters. Lets create a BIG team!'
