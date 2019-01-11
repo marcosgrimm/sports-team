@@ -32,10 +32,11 @@
             </div>
         </div>
 
-        <div class="pull-right">
-            <button type="submit" class="btn btn-success">Save</button>
+        <div class="row">
+            <div class="col-md-12 ">
+                <button type="submit" class="btn btn-success pull-right">Save</button>
+            </div>
         </div>
-
         <template v-if="errors">
             <div v-for="(errorMsgs,inputName) in errors" :key="inputName" class="alert alert-danger text-center"
                  role="alert">

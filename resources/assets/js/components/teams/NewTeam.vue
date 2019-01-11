@@ -4,10 +4,12 @@
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" v-model="team.name">
         </div>
-        <div class="pull-right">
 
-            <button type="reset" class="btn btn-default">Reset</button>
-            <button type="submit" class="btn btn-success">Add</button>
+        <div class="row">
+            <div class="col-md-12 ">
+                <button type="reset" class="btn btn-default ">Reset</button>
+                <button type="submit" class="btn btn-success pull-right">Add</button>
+            </div>
         </div>
 
         <template v-if="errors">
