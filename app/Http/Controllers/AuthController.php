@@ -80,6 +80,10 @@ class AuthController extends Controller
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
+
+    /**
+     * @return mixed
+     */
     public function guard(){
         return Auth::guard('api');
     }

@@ -7,6 +7,11 @@ use App\Models\TeamPlayer;
 class TeamsPlayersController extends Controller
 {
 
+    /**
+     * @param $teamId
+     * @param $playerId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($teamId, $playerId)
     {
         TeamPlayer::where('team_id', $teamId)

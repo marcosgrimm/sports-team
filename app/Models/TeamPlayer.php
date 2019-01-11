@@ -17,10 +17,17 @@ class TeamPlayer extends Model
 
     protected $fillable = ['team_id', 'player_id', 'start', 'end'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function team(){
         return $this->hasOne(Team::class,'id', 'team_id');
 
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function player(){
         return $this->hasOne(Player::class,'id', 'player_id');
 

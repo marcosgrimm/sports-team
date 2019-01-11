@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class PlayersController extends Controller
 {
+    /**
+     * @param Player $player
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function teams(Player $player)
     {
         $playerTeams = $player->playerTeams()->with('team')->get();
@@ -17,6 +21,9 @@ class PlayersController extends Controller
         return response()->json(["playerTeams" => $playerTeams], 200);
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
         $players = Player::all();
@@ -24,6 +31,10 @@ class PlayersController extends Controller
         return response()->json(["players" => $players], 200);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($id)
     {
         $player = Player::find($id);
@@ -31,6 +42,11 @@ class PlayersController extends Controller
         return response()->json(["player" => $player], 200);
     }
 
+    /**
+     * @param Request $request
+     * @param Player $player
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Request $request, Player $player)
     {
         $player = \DB::transaction(function () use ($request, $player) {
@@ -61,6 +77,10 @@ class PlayersController extends Controller
         return response()->json(['player' => $player], 200);
     }
 
+    /**
+     * @param CreatePlayerRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(CreatePlayerRequest $request)
     {
 
@@ -90,8 +110,13 @@ class PlayersController extends Controller
         return response()->json(['player' => $player], 200);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy($id)
     {
+        TeamPlayer::where('player_id',$id)->delete();
         Player::destroy($id);
 
         return response()->json([], 200);

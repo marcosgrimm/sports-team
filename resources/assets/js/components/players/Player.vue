@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Teams
+                        Team Contracts
                     </div>
                     <div class="panel-body">
                         <template v-if="!storedTeams">
@@ -63,15 +63,13 @@
                         <template v-else>
                             <table class="table table-striped">
                                 <thead>
-                                    <th class="col-md-1 text-center">ID</th>
-                                    <th>Name</th>
+                                    <th>Team</th>
                                     <th class="col-md-1 text-center">Start</th>
                                     <th class="col-md-1 text-center">End</th>
                                     <th class="col-md-1 text-center"><span class="glyphicon glyphicon-cog"></span></th>
                                 </thead>
                                 <tbody>
                                 <tr v-for="storedTeam in storedTeams">
-                                    <td>{{storedTeam.team.id}}</td>
                                     <td>{{storedTeam.team.name}}</td>
                                     <td class="col-md-1 text-center">{{storedTeam.start}}</td>
                                     <td class="col-md-1 text-center">{{storedTeam.end}}</td>
@@ -179,14 +177,14 @@
             getConstraints() {
                 return {
                     first_name: {
-                        presence: true,
+                        presence: {  allowEmpty: false },
                         length: {
                             minimum: 3,
                             message: 'A player name should not be so short. Please make it at least 3 characters.!'
                         }
                     },
                     last_name: {
-                        presence: true,
+                        presence: {  allowEmpty: false },
                         length: {
                             minimum: 3,
                             message: 'A player name should not be so short. Please make it at least 3 characters.!'

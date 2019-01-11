@@ -21,8 +21,9 @@ Route::group(['prefix' => 'auth'], function ($router) {
 
 });
 
-Route::group(['middleware' => 'jwt.auth'], function ($router) {
+Route::post('register', 'Auth\RegisterController@create');
 
+Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::delete('teams/{teamId}/players/{playerId}', 'TeamsPlayersController@destroy');
 
     Route::get('teams/{team}/players', 'TeamsController@players');
@@ -38,7 +39,4 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::post('players', 'PlayersController@store');
     Route::get('players/{id}', 'PlayersController@show');
     Route::delete('players/{id}', 'PlayersController@destroy');
-
-
-
 });

@@ -48483,6 +48483,9 @@ var index_esm = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_players_NewPlayer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_players_NewPlayer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_players_Player__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_players_Player___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_players_Player__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_users_Register__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_users_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_users_Register__);
+
 
 
 
@@ -48506,6 +48509,9 @@ var routes = [{
 }, {
     path: '/login',
     component: __WEBPACK_IMPORTED_MODULE_1__components_auth_Login___default.a
+}, {
+    path: '/register',
+    component: __WEBPACK_IMPORTED_MODULE_10__components_users_Register___default.a
 }, {
     path: '/teams',
     component: __WEBPACK_IMPORTED_MODULE_2__components_teams_TeamsDefault___default.a,
@@ -48873,9 +48879,7 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "user_login" } }, [
-                    _vm._v("Email")
-                  ]),
+                  _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -48888,9 +48892,9 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     attrs: {
-                      type: "text",
-                      name: "log",
-                      id: "user_login",
+                      type: "email",
+                      id: "email",
+                      name: "email",
                       value: "",
                       size: "20"
                     },
@@ -48907,7 +48911,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "user_password" } }, [
+                  _c("label", { attrs: { for: "password" } }, [
                     _vm._v("Password")
                   ]),
                   _vm._v(" "),
@@ -48923,8 +48927,8 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: {
                       type: "password",
-                      name: "user_password",
-                      id: "user_password",
+                      name: "password",
+                      id: "password",
                       value: "",
                       size: "20"
                     },
@@ -48947,7 +48951,17 @@ var render = function() {
               2
             ),
             _vm._v(" "),
-            _vm._m(2)
+            _c(
+              "p",
+              { staticClass: "small text-center text-gray-soft" },
+              [
+                _vm._v("Don't have an account yet?\n                        "),
+                _c("router-link", { attrs: { to: "/Register" } }, [
+                  _vm._v("Register")
+                ])
+              ],
+              1
+            )
           ])
         ])
       ])
@@ -48978,19 +48992,6 @@ var staticRenderFns = [
       },
       [_c("h6", [_vm._v("Wait a sec. Your e-mail and password don't match.")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "small text-center text-gray-soft" }, [
-      _vm._v("Don't have an account yet?\n                        "),
-      _c(
-        "a",
-        { attrs: { href: "https://themes.getbootstrap.com/my-account/" } },
-        [_vm._v("Sign up")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -49584,7 +49585,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getConstraints: function getConstraints() {
             return {
                 name: {
-                    presence: true,
+                    presence: { allowEmpty: false },
                     length: {
                         minimum: 3,
                         message: 'A team name should not be so short. Please make it at least 3 characters. Lets create a BIG team!'
@@ -49779,7 +49780,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49792,10 +49793,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validate_js__);
-//
-//
-//
-//
 //
 //
 //
@@ -49937,7 +49934,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getConstraints: function getConstraints() {
             return {
                 name: {
-                    presence: true,
+                    presence: { allowEmpty: false },
                     length: {
                         minimum: 3,
                         message: 'A team name should not be so short. Please make it at least 3 characters. Lets create a BIG team!'
@@ -50023,7 +50020,7 @@ var render = function() {
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "panel panel-default" }, [
           _c("div", { staticClass: "panel-heading" }, [
-            _vm._v("\n                Players\n            ")
+            _vm._v("\n                Player Contracts\n            ")
           ]),
           _vm._v(" "),
           _c(
@@ -50040,14 +50037,12 @@ var render = function() {
                         "tbody",
                         _vm._l(_vm.storedPlayers, function(storedPlayer) {
                           return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(storedPlayer.player.id))]),
-                            _vm._v(" "),
                             _c("td", [
-                              _vm._v(_vm._s(storedPlayer.player.first_name))
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(_vm._s(storedPlayer.player.last_name))
+                              _vm._v(
+                                _vm._s(storedPlayer.player.first_name) +
+                                  " " +
+                                  _vm._s(storedPlayer.player.last_name)
+                              )
                             ]),
                             _vm._v(" "),
                             _c("td", { staticClass: "col-md-1 text-center" }, [
@@ -50127,11 +50122,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("ID")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("First Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Last Name")]),
+      _c("th", [_vm._v("Player")]),
       _vm._v(" "),
       _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("Start")]),
       _vm._v(" "),
@@ -50783,14 +50774,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getConstraints: function getConstraints() {
             return {
                 first_name: {
-                    presence: true,
+                    presence: { allowEmpty: false },
                     length: {
                         minimum: 3,
                         message: 'A player name should not be so short. Please make it at least 3 characters.!'
                     }
                 },
                 last_name: {
-                    presence: true,
+                    presence: { allowEmpty: false },
                     length: {
                         minimum: 3,
                         message: 'A player name should not be so short. Please make it at least 3 characters.!'
@@ -51104,7 +51095,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51117,8 +51108,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validate_js__);
-//
-//
 //
 //
 //
@@ -51304,14 +51293,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getConstraints: function getConstraints() {
             return {
                 first_name: {
-                    presence: true,
+                    presence: { allowEmpty: false },
                     length: {
                         minimum: 3,
                         message: 'A player name should not be so short. Please make it at least 3 characters.!'
                     }
                 },
                 last_name: {
-                    presence: true,
+                    presence: { allowEmpty: false },
                     length: {
                         minimum: 3,
                         message: 'A player name should not be so short. Please make it at least 3 characters.!'
@@ -51524,7 +51513,7 @@ var render = function() {
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "panel panel-default" }, [
           _c("div", { staticClass: "panel-heading" }, [
-            _vm._v("\n                    Teams\n                ")
+            _vm._v("\n                    Team Contracts\n                ")
           ]),
           _vm._v(" "),
           _c(
@@ -51541,8 +51530,6 @@ var render = function() {
                         "tbody",
                         _vm._l(_vm.storedTeams, function(storedTeam) {
                           return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(storedTeam.team.id))]),
-                            _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(storedTeam.team.name))]),
                             _vm._v(" "),
                             _c("td", { staticClass: "col-md-1 text-center" }, [
@@ -51620,9 +51607,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("ID")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Name")]),
+      _c("th", [_vm._v("Team")]),
       _vm._v(" "),
       _c("th", { staticClass: "col-md-1 text-center" }, [_vm._v("Start")]),
       _vm._v(" "),
@@ -51958,7 +51943,7 @@ var render = function() {
                       "li",
                       [
                         _c("router-link", { attrs: { to: "/register" } }, [
-                          _vm._v("Sign On")
+                          _vm._v("Register")
                         ])
                       ],
                       1
@@ -52108,6 +52093,386 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(114)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(116)
+/* template */
+var __vue_template__ = __webpack_require__(117)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-1ec133c1"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/users/Register.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1ec133c1", Component.options)
+  } else {
+    hotAPI.reload("data-v-1ec133c1", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(115);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("43df9104", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1ec133c1\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Register.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1ec133c1\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Register.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 116 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validate_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validate_js__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "Register",
+    data: function data() {
+        return {
+            exception: null,
+            form: {
+                name: null,
+                email: null,
+                password: null
+            },
+            errors: null
+        };
+    },
+
+    methods: {
+        register: function register() {
+            var _this = this;
+
+            this.errors = null;
+            var constraints = this.getConstraints();
+            var form = this.$data.form;
+            var errors = __WEBPACK_IMPORTED_MODULE_0_validate_js___default()(form, constraints);
+            if (errors) {
+                this.errors = errors;
+                return;
+            }
+            axios.post('/api/register', form).then(function (response) {
+                _this.$router.push('/login');
+            });
+        },
+        getConstraints: function getConstraints() {
+            return {
+                email: {
+                    presence: { allowEmpty: false },
+                    email: true
+                },
+                password: {
+                    presence: { allowEmpty: false }
+                },
+                name: {
+                    presence: { allowEmpty: false }
+                }
+
+            };
+        }
+    }
+});
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4 col-md-offset-4" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v("\n                    Register\n                ")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "panel-body" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.register($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.name,
+                        expression: "form.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "name",
+                      id: "name",
+                      value: "",
+                      size: "20"
+                    },
+                    domProps: { value: _vm.form.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.email,
+                        expression: "form.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "email",
+                      name: "email",
+                      id: "email",
+                      value: "",
+                      size: "20"
+                    },
+                    domProps: { value: _vm.form.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "password" } }, [
+                    _vm._v("Password")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.password,
+                        expression: "form.password"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "password",
+                      name: "password",
+                      id: "password",
+                      size: "20"
+                    },
+                    domProps: { value: _vm.form.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "password", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _vm.errors
+                  ? _vm._l(_vm.errors, function(errorMsgs, inputName) {
+                      return _c(
+                        "div",
+                        {
+                          key: inputName,
+                          staticClass: "alert alert-danger text-center",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _c("b", [_vm._v(_vm._s(inputName))]),
+                          _vm._v(
+                            ": " +
+                              _vm._s(errorMsgs.join(", ")) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                    })
+                  : _vm._e()
+              ],
+              2
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("input", {
+        staticClass: "btn btn-brand btn-block",
+        attrs: { type: "submit", value: "Register" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1ec133c1", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

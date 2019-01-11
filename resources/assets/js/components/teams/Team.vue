@@ -23,7 +23,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Players
+                    Player Contracts
                 </div>
                 <div class="panel-body">
                     <template v-if="!storedPlayers">
@@ -34,18 +34,14 @@
                     <template v-else>
                         <table class="table table-striped">
                             <thead>
-                            <th class="col-md-1 text-center">ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Player</th>
                             <th class="col-md-1 text-center">Start</th>
                             <th class="col-md-1 text-center">End</th>
                             <th class="col-md-1 text-center"><span class="glyphicon glyphicon-cog"></span></th>
                             </thead>
                             <tbody>
                             <tr v-for="storedPlayer in storedPlayers">
-                                <td>{{storedPlayer.player.id}}</td>
-                                <td>{{storedPlayer.player.first_name}}</td>
-                                <td>{{storedPlayer.player.last_name}}</td>
+                                <td>{{storedPlayer.player.first_name}} {{storedPlayer.player.last_name}}</td>
                                 <td class="col-md-1 text-center">{{storedPlayer.start}}</td>
                                 <td class="col-md-1 text-center">{{storedPlayer.end}}</td>
                                 <td class="text-center">
@@ -136,7 +132,7 @@
             getConstraints() {
                 return {
                     name: {
-                        presence: true,
+                        presence: {  allowEmpty: false },
                         length: {
                             minimum: 3,
                             message: 'A team name should not be so short. Please make it at least 3 characters. Lets create a BIG team!'

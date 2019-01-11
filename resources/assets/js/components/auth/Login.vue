@@ -6,13 +6,13 @@
                     <div class="panel-body">
                         <form @submit.prevent="auth">
                             <div class="form-group">
-                                <label for="user_login">Email</label>
-                                <input type="text" name="log" id="user_login" class="form-control" value="" size="20"
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" value="" size="20"
                                        v-model="form.email">
                             </div>
                             <div class="form-group">
-                                <label for="user_password">Password</label>
-                                <input type="password" name="user_password" id="user_password" class="form-control" value=""
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control" value=""
                                        size="20" v-model="form.password">
                             </div>
                             <div class="form-group">
@@ -26,7 +26,7 @@
                             </template>
                         </form>
                         <p class="small text-center text-gray-soft">Don't have an account yet?
-                            <a href="https://themes.getbootstrap.com/my-account/">Sign up</a>
+                            <router-link to="/Register">Register</router-link>
                         </p>
                     </div>
                 </div>

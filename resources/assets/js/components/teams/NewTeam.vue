@@ -56,7 +56,7 @@
             getConstraints() {
                 return {
                     name: {
-                        presence: true,
+                        presence: {  allowEmpty: false },
                         length: {
                             minimum: 3,
                             message: 'A team name should not be so short. Please make it at least 3 characters. Lets create a BIG team!'

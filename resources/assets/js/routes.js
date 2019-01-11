@@ -10,6 +10,7 @@ import PlayersDefault from "./components/players/PlayersDefault";
 import PlayersList from "./components/players/PlayersList";
 import NewPlayer from "./components/players/NewPlayer";
 import Player from "./components/players/Player";
+import Register from "./components/users/Register";
 
 export const routes = [
     {
@@ -23,6 +24,10 @@ export const routes = [
     {
         path: '/login',
         component: Login
+    },
+    {
+        path: '/register',
+        component: Register
     },
     {
         path: '/teams',

@@ -19,7 +19,7 @@
                             <router-link to="/login">Sign In</router-link>
                         </li>
                         <li>
-                            <router-link to="/register">Sign On</router-link>
+                            <router-link to="/register">Register</router-link>
                         </li>
                     </template>
                     <template v-else>
