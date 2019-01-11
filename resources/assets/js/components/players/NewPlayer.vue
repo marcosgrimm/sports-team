@@ -33,8 +33,7 @@
         </div>
 
         <div class="pull-right">
-
-            <button type="submit" class="btn btn-success">Edit</button>
+            <button type="submit" class="btn btn-success">Save</button>
         </div>
 
         <template v-if="errors">
